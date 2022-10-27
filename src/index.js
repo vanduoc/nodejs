@@ -2,17 +2,18 @@ const path = require('path');
 const express = require('express');
 const { engine } = require('express-handlebars');
 const morgan = require('morgan');
+const route = require('./routes');
 const app = express();
 const port = 3001;
 
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'public')));
 
 // Xử lý dữ liệu gửi lên server khi submit từ form lên// thư viện body-parser/ đưa dữ liệu vào body
 app.use(express.urlencoded({
   extended: true,
 }));
 // Xử lý dữ liệu truyền lên server khi dùng fetch, axio, XMLHttpRequest...
-app.use(express.json())
+app.use(express.json());
 
 // HTTP request logger middleware for node.js
 app.use(morgan('combined'));
@@ -20,24 +21,11 @@ app.use(morgan('combined'));
 // Template engine
 app.engine('hbs', engine({extname: '.hbs'}));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'))
+app.set('views', path.join(__dirname, 'resources/views'));
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
-
-app.get('/news', (req, res) => {
-  res.render('news');
-});
-
-app.get('/search', (req, res) => {
-  res.render('search');
-});
-
-app.post('/search', (req, res) => {
-  res.render('search');
-});
+// Routes init
+route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`);
 });
