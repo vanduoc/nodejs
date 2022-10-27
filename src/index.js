@@ -7,6 +7,13 @@ const port = 3001;
 
 app.use(express.static(path.join(__dirname,'public')))
 
+// Xử lý dữ liệu gửi lên server khi submit từ form lên// thư viện body-parser/ đưa dữ liệu vào body
+app.use(express.urlencoded({
+  extended: true,
+}));
+// Xử lý dữ liệu truyền lên server khi dùng fetch, axio, XMLHttpRequest...
+app.use(express.json())
+
 // HTTP request logger middleware for node.js
 app.use(morgan('combined'));
 
@@ -21,6 +28,14 @@ app.get('/', (req, res) => {
 
 app.get('/news', (req, res) => {
   res.render('news');
+});
+
+app.get('/search', (req, res) => {
+  res.render('search');
+});
+
+app.post('/search', (req, res) => {
+  res.render('search');
 });
 
 app.listen(port, () => {
