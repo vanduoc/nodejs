@@ -6,12 +6,14 @@ const route = require('./routes');
 const app = express();
 const port = 3001;
 
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Xử lý dữ liệu gửi lên server khi submit từ form lên// thư viện body-parser/ đưa dữ liệu vào body
-app.use(express.urlencoded({
-  extended: true,
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
 // Xử lý dữ liệu truyền lên server khi dùng fetch, axio, XMLHttpRequest...
 app.use(express.json());
 
@@ -19,7 +21,7 @@ app.use(express.json());
 app.use(morgan('combined'));
 
 // Template engine
-app.engine('hbs', engine({extname: '.hbs'}));
+app.engine('hbs', engine({ extname: '.hbs' }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
