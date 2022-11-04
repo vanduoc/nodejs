@@ -24,18 +24,21 @@ app.use(
 app.use(express.json());
 
 // HTTP request logger middleware for node.js
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 //Lets we use HTTP verbs such as PUT or DELETE in places where the client doesn’t support it.
 app.use(methodOverride('_method'));
 
 // Template engine
-app.engine('hbs', engine({ 
-  extname: '.hbs',
-  helpers: {
-    sum: (a, b) => a + b,
-  },
-}));
+app.engine(
+  'hbs',
+  engine({
+    extname: '.hbs',
+    helpers: {
+      sum: (a, b) => a + b,
+    },
+  }),
+);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
