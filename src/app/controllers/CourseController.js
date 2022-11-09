@@ -61,9 +61,36 @@ class CourseController {
 
   //[DELETE]/courses/:id
   destroy(req, res, next) {
-    Course.deleteOne({ _id: req.params.id })
+    Course.deleteById(req.params.id)
       .then(() => res.redirect('back'))
       .catch(next);
+  }
+
+  //[PATCH]/courses/:id/restore
+  restore(req, res, next) {
+    Course.restore({ _id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next);
+  }
+
+  //[PATCH]/courses/:id/restore
+  forceDestroy(req, res, next) {
+    Course.remove({ _id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next);
+  }
+
+  //[POST]/courses/handle-action-form
+  handleActionForm(req, res, next) {
+    switch (req.body.action) {
+      case 'delete':
+        Course.delete({ _id: { $in: req.body.courseIds } }).then(() =>
+          res.redirect('back'),
+        );
+        break;
+      default:
+        res.send('invalid action!');
+    }
   }
 }
 

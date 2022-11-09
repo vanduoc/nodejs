@@ -11,7 +11,6 @@ const db = require('./config/db');
 
 //connect DB
 db.connect();
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Xử lý dữ liệu gửi lên server khi submit từ form lên// thư viện body-parser/ đưa dữ liệu vào body
