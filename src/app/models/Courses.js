@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 slug = require('mongoose-slug-generator');
 var mongoose_delete = require('mongoose-delete');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
 const Schema = mongoose.Schema;
 
 const Course = new Schema(
   {
+    _id: { type: Number },
     name: { type: String, require: true, default: "courses's name" },
     desc: {
       type: String,
@@ -21,6 +24,7 @@ const Course = new Schema(
   },
   {
     timestamps: true,
+    _id: false,
   },
 );
 // Add plugin
@@ -29,5 +33,7 @@ Course.plugin(mongoose_delete, {
   deletedAt: true,
   overrideMethods: 'all',
 });
+
+Course.plugin(AutoIncrement);
 
 module.exports = mongoose.model('Course', Course);
