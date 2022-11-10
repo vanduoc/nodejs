@@ -17,10 +17,16 @@
             <tr>
               <th>#</th>
               <th scope="col">STT</th>
-              <th scope="col">Tên khóa học</th>
-              <th scope="col">Mô tả khóa học</th>
-              <th scope="col">Trình độ</th>
-              <th scope="col">Update gần nhất</th>
+              <th scope="col">
+                Tên khóa học 
+                {{{sortable "name" _sort}}}
+              </th>
+              <th scope="col">Trình độ
+                {{{sortable "level" _sort}}}
+              </th>
+              <th scope="col">Update gần nhất
+                {{{sortable "createdAt" _sort}}}
+              </th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +38,6 @@
                     </td>
                   <th scope="row">{{sum @index 1}}</th> 
                   <td>{{this.name}}</td>
-                  <td>{{this.desc}}</td>
                   <td>{{this.level}}</td>
                   <td>{{this.updatedAt}}</td>
                   <td>
